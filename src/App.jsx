@@ -1,7 +1,10 @@
+import { TodoForm } from './components/TodoForm';
+
 function App() {
   return (
     <>
-      <p>Hello, World!</p>
+      <h1>오늘의 할 일 목록</h1>
+      <TodoForm />
     </>
   );
 }
