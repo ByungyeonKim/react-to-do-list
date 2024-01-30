@@ -1,12 +1,31 @@
-export function TodoForm() {
+import { useState } from 'react';
+
+export function TodoForm({ onAddTodos }) {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  const handleTitle = (value) => {
+    setTitle(value);
+  };
+
+  const handleContent = (value) => {
+    setContent(value);
+  };
+
+  const handleAddTodo = () => {
+    onAddTodos(title, content);
+    setTitle('');
+    setContent('');
+  };
+
   return (
     <section>
       <label>
         제목
         <input
           type='text'
-          onChange={() => console.log('Changed!')}
-          value={''}
+          onChange={(e) => handleTitle(e.target.value)}
+          value={title}
         />
       </label>
 
@@ -14,12 +33,12 @@ export function TodoForm() {
         내용
         <input
           type='text'
-          onChange={() => console.log('Changed!')}
-          value={''}
+          onChange={(e) => handleContent(e.target.value)}
+          value={content}
         />
       </label>
 
-      <button type='button' onClick={() => console.log('Click!')}>
+      <button type='button' onClick={handleAddTodo}>
         추가
       </button>
     </section>
