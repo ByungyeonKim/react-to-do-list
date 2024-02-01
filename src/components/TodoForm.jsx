@@ -12,14 +12,26 @@ export function TodoForm({ onAddTodos }) {
     setContent(value);
   };
 
-  const handleAddTodo = () => {
+  const addTodo = (e) => {
+    e.preventDefault();
+
+    if (!title) {
+      alert('제목을 입력해주세요.');
+      return;
+    }
+
+    if (!content) {
+      alert('내용을 입력해주세요.');
+      return;
+    }
+
     onAddTodos(title, content);
     setTitle('');
     setContent('');
   };
 
   return (
-    <section>
+    <form onSubmit={(e) => addTodo(e)}>
       <label>
         제목
         <input
@@ -38,9 +50,7 @@ export function TodoForm({ onAddTodos }) {
         />
       </label>
 
-      <button type='button' onClick={handleAddTodo}>
-        추가
-      </button>
-    </section>
+      <button>추가</button>
+    </form>
   );
 }
