@@ -16,6 +16,23 @@ function App() {
 
     setTodos((prev) => [...prev, newTodo]);
   };
+  const toggleIsDone = (todoId) => {
+    let newTodo = null;
+    let newTodos = [];
+
+    todos.forEach((todo) => {
+      if (todo.id === todoId) {
+        newTodo = {
+          ...todo,
+          isDone: !todo.isDone,
+        };
+        return;
+      }
+      newTodos.push(todo);
+    });
+
+    setTodos([...newTodos, newTodo]);
+  };
 
   const doingList = [];
   const doneList = [];
@@ -30,9 +47,9 @@ function App() {
       <h1>오늘의 할 일 목록</h1>
       <TodoForm onAddTodos={onAddTodos} />
       <h2>오늘 할 일</h2>
-      <TodoList todos={doingList} />
+      <TodoList todos={doingList} toggleIsDone={toggleIsDone} />
       <h2>완료한 일</h2>
-      <TodoList todos={doneList} />
+      <TodoList todos={doneList} toggleIsDone={toggleIsDone} />
       <Footer />
     </>
   );

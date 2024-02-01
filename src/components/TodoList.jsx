@@ -1,6 +1,6 @@
 import { TodoItem } from './TodoItem';
 
-export function TodoList({ todos }) {
+export function TodoList({ todos, toggleIsDone }) {
   if (!todos.length) return <p>오늘은 비어있어요.</p>;
 
   return (
@@ -8,7 +8,7 @@ export function TodoList({ todos }) {
       {todos.map((todo) => {
         return (
           <li key={todo.id}>
-            <TodoItem todo={todo} />
+            <TodoItem todo={todo} toggleIsDone={toggleIsDone} />
           </li>
         );
       })}
