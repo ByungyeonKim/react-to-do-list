@@ -1,4 +1,4 @@
-export function TodoItem({ todo, toggleIsDone }) {
+export function TodoItem({ todo, toggleIsDone, onDeleteTodo }) {
   const { id, title, contents, isDone } = todo;
 
   return (
@@ -8,7 +8,7 @@ export function TodoItem({ todo, toggleIsDone }) {
       <button onClick={() => toggleIsDone(id)}>
         {isDone ? '취소' : '완료'}
       </button>
-      <button>삭제</button>
+      <button onClick={() => onDeleteTodo(id)}>삭제</button>
     </section>
   );
 }

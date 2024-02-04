@@ -33,6 +33,10 @@ function App() {
 
     setTodos([...newTodos, newTodo]);
   };
+  const onDeleteTodo = (todoId) => {
+    const deletedTodos = todos.filter((todo) => todo.id !== todoId);
+    setTodos(deletedTodos);
+  };
 
   const doingList = [];
   const doneList = [];
@@ -47,9 +51,17 @@ function App() {
       <h1>오늘의 할 일 목록</h1>
       <TodoForm onAddTodos={onAddTodos} />
       <h2>오늘 할 일</h2>
-      <TodoList todos={doingList} toggleIsDone={toggleIsDone} />
+      <TodoList
+        todos={doingList}
+        toggleIsDone={toggleIsDone}
+        onDeleteTodo={onDeleteTodo}
+      />
       <h2>완료한 일</h2>
-      <TodoList todos={doneList} toggleIsDone={toggleIsDone} />
+      <TodoList
+        todos={doneList}
+        toggleIsDone={toggleIsDone}
+        onDeleteTodo={onDeleteTodo}
+      />
       <Footer />
     </>
   );
