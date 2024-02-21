@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { TodoForm } from './components/TodoForm';
 import { TodoList } from './components/TodoList';
@@ -38,6 +38,17 @@ function App() {
     const deletedTodos = todos.filter((todo) => todo.id !== todoId);
     setTodos(deletedTodos);
   };
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`${process.env.REACT_APP_JSON_BASE_URL}/todos`);
+
+      if (!res.ok) return;
+
+      const json = await res.json();
+      setTodos(json);
+    })();
+  }, []);
 
   const doingList = [];
   const doneList = [];
