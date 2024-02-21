@@ -31,26 +31,33 @@ export function TodoForm({ onAddTodos }) {
   };
 
   return (
-    <form onSubmit={(e) => addTodo(e)}>
-      <label>
-        제목
-        <input
-          type='text'
-          onChange={(e) => handleTitle(e.target.value)}
-          value={title}
-        />
-      </label>
+    <form
+      className='card bg-base-100 shadow-xl p-14 gap-4'
+      onSubmit={(e) => addTodo(e)}
+    >
+      <section className='flex gap-3 flex-wrap'>
+        <label className='flex-1 basis-40'>
+          <b>제목</b>
+          <input
+            type='text'
+            className='input input-bordered w-full mt-2'
+            onChange={(e) => handleTitle(e.target.value)}
+            value={title}
+          />
+        </label>
 
-      <label>
-        내용
-        <input
-          type='text'
-          onChange={(e) => handleContent(e.target.value)}
-          value={content}
-        />
-      </label>
+        <label className='flex-1 basis-40'>
+          <b>내용</b>
+          <input
+            type='text'
+            className='input input-bordered w-full mt-2'
+            onChange={(e) => handleContent(e.target.value)}
+            value={content}
+          />
+        </label>
+      </section>
 
-      <button>추가</button>
+      <button className='btn btn-outline btn-primary'>추가</button>
     </form>
   );
 }

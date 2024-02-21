@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TodoForm } from './components/TodoForm';
 import { TodoList } from './components/TodoList';
 import { Footer } from './components/Footer';
+import { Header } from './components/Header';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -48,20 +49,28 @@ function App() {
 
   return (
     <>
-      <h1>오늘의 할 일 목록</h1>
-      <TodoForm onAddTodos={onAddTodos} />
-      <h2>오늘 할 일</h2>
-      <TodoList
-        todos={doingList}
-        toggleIsDone={toggleIsDone}
-        onDeleteTodo={onDeleteTodo}
-      />
-      <h2>완료한 일</h2>
-      <TodoList
-        todos={doneList}
-        toggleIsDone={toggleIsDone}
-        onDeleteTodo={onDeleteTodo}
-      />
+      <Header />
+      <main>
+        <section className='mx-auto max-w-screen-xl px-4 pb-8 sm:px-6'>
+          <TodoForm onAddTodos={onAddTodos} />
+          <h2 className='text-xl font-bold text-gray-900 sm:text-2xl py-3 mt-6'>
+            오늘 할 일
+          </h2>
+          <TodoList
+            todos={doingList}
+            toggleIsDone={toggleIsDone}
+            onDeleteTodo={onDeleteTodo}
+          />
+          <h2 className='text-xl font-bold text-gray-900 sm:text-2xl py-3 mt-6'>
+            완료한 일
+          </h2>
+          <TodoList
+            todos={doneList}
+            toggleIsDone={toggleIsDone}
+            onDeleteTodo={onDeleteTodo}
+          />
+        </section>
+      </main>
       <Footer />
     </>
   );
