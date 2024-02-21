@@ -7,14 +7,7 @@ import { Header } from './components/Header';
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const onAddTodos = (title, contents) => {
-    const newTodo = {
-      id: crypto.randomUUID(),
-      title,
-      contents,
-      isDone: false,
-    };
-
+  const onAddTodos = (newTodo) => {
     setTodos((prev) => [...prev, newTodo]);
   };
   const toggleIsDone = (todoId) => {

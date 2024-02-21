@@ -12,6 +12,22 @@ export function TodoForm({ onAddTodos }) {
     setContent(value);
   };
 
+  const createTodo = async (newTodo) => {
+    const res = await fetch(`${process.env.REACT_APP_JSON_BASE_URL}/todos`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTodo),
+    });
+
+    if (!res.ok) return;
+
+    const json = await res.json();
+
+    onAddTodos(json);
+  };
+
   const addTodo = (e) => {
     e.preventDefault();
 
@@ -25,7 +41,13 @@ export function TodoForm({ onAddTodos }) {
       return;
     }
 
-    onAddTodos(title, content);
+    const newTodo = {
+      title,
+      contents: content,
+      isDone: false,
+    };
+
+    createTodo(newTodo);
     setTitle('');
     setContent('');
   };
