@@ -10,9 +10,9 @@ function App() {
   const onAddTodos = (newTodo) => {
     setTodos((prev) => [...prev, newTodo]);
   };
-  const toggleIsDone = (todoId) => {
+  const toggleIsDone = async (todoId) => {
     let newTodo = null;
-    let newTodos = [];
+    const newTodos = [];
 
     todos.forEach((todo) => {
       if (todo.id === todoId) {
@@ -24,6 +24,23 @@ function App() {
       }
       newTodos.push(todo);
     });
+
+    const res = await fetch(
+      `${process.env.REACT_APP_JSON_BASE_URL}/todos/${todoId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          isDone: newTodo.isDone,
+        }),
+      }
+    );
+
+    if (!res.ok) {
+      return;
+    }
 
     setTodos([...newTodos, newTodo]);
   };
