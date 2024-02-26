@@ -27,8 +27,21 @@ function App() {
 
     setTodos([...newTodos, newTodo]);
   };
-  const onDeleteTodo = (todoId) => {
+
+  const onDeleteTodo = async (todoId) => {
+    const res = await fetch(
+      `${process.env.REACT_APP_JSON_BASE_URL}/todos/${todoId}`,
+      {
+        method: 'DELETE',
+      }
+    );
+
+    if (!res.ok) {
+      return;
+    }
+
     const deletedTodos = todos.filter((todo) => todo.id !== todoId);
+
     setTodos(deletedTodos);
   };
 
