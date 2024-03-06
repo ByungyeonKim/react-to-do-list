@@ -1,5 +1,17 @@
-export function TodoItem({ todo, toggleIsDone, onDeleteTodo }) {
+import { useDispatch } from 'react-redux';
+import { deleteTodo, editIsDone } from '../features/todo/todoSlice';
+
+export function TodoItem({ todo }) {
   const { id, title, contents, isDone } = todo;
+  const dispatch = useDispatch();
+
+  const toggleIsDone = async (todo) => {
+    dispatch(editIsDone(todo));
+  };
+
+  const onDeleteTodo = (todoId) => {
+    dispatch(deleteTodo(todoId));
+  };
 
   return (
     <section className='card bg-base-100 shadow-xl'>
@@ -9,7 +21,7 @@ export function TodoItem({ todo, toggleIsDone, onDeleteTodo }) {
         <div className='flex gap-2 justify-end'>
           <button
             className='btn btn-primary btn-outline'
-            onClick={() => toggleIsDone(id)}
+            onClick={() => toggleIsDone(todo)}
           >
             {isDone ? '취소' : '완료'}
           </button>

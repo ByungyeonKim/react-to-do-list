@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createTodo } from '../features/todo/todoSlice';
 
-export function TodoForm({ onAddTodos }) {
+export function TodoForm() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const dispatch = useDispatch();
 
   const handleTitle = (value) => {
     setTitle(value);
@@ -10,22 +13,6 @@ export function TodoForm({ onAddTodos }) {
 
   const handleContent = (value) => {
     setContent(value);
-  };
-
-  const createTodo = async (newTodo) => {
-    const res = await fetch(`${process.env.REACT_APP_JSON_BASE_URL}/todos`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newTodo),
-    });
-
-    if (!res.ok) return;
-
-    const json = await res.json();
-
-    onAddTodos(json);
   };
 
   const addTodo = (e) => {
@@ -41,13 +28,7 @@ export function TodoForm({ onAddTodos }) {
       return;
     }
 
-    const newTodo = {
-      title,
-      contents: content,
-      isDone: false,
-    };
-
-    createTodo(newTodo);
+    dispatch(createTodo({ title, content }));
     setTitle('');
     setContent('');
   };

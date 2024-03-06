@@ -1,6 +1,6 @@
 import { TodoItem } from './TodoItem';
 
-export function TodoList({ todos, toggleIsDone, onDeleteTodo }) {
+export function TodoList({ todos }) {
   if (!todos.length) return <p className='py-3'>오늘은 비어있어요.</p>;
 
   return (
@@ -8,11 +8,7 @@ export function TodoList({ todos, toggleIsDone, onDeleteTodo }) {
       {todos.map((todo) => {
         return (
           <li key={todo.id}>
-            <TodoItem
-              todo={todo}
-              toggleIsDone={toggleIsDone}
-              onDeleteTodo={onDeleteTodo}
-            />
+            <TodoItem todo={todo} />
           </li>
         );
       })}
